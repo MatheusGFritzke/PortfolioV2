@@ -4,10 +4,10 @@ import { useTheme } from 'next-themes'
 
 export default function CursorGradient() {
   const { theme } = useTheme()
+  console.log(theme)
   const [position, setPosition] = useState({ x: 0, y: 0 })
-  const [gradientColor, setGradientColor] = useState(
-    theme === 'dark' ? '#0b1b34' : '#d4d4d4',
-  )
+  const [gradientColor, setGradientColor] = useState('#0b1b34')
+  const [showGradient, setShowGradient] = useState(false)
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -23,14 +23,20 @@ export default function CursorGradient() {
 
   useEffect(() => {
     if (theme === 'dark') {
-      setGradientColor('#0e2448') // Cor para dark mode
+      setGradientColor('#0c203f') // Cor para dark mode
+      setShowGradient(true)
     } else {
       setGradientColor('#d4d4d4') // Cor cinza para light mode
+      setShowGradient(true)
     }
   }, [theme])
 
+  const background = showGradient
+    ? `radial-gradient(circle at ${position.x}px ${position.y}px, ${gradientColor}, rgba(255,0,0,0) 60%)`
+    : ''
+
   const gradientStyle: CSSProperties = {
-    background: `radial-gradient(circle at ${position.x}px ${position.y}px, ${gradientColor}, rgba(255,0,0,0) 70%)`,
+    background,
     position: 'fixed',
     top: 0,
     left: 0,
@@ -40,5 +46,5 @@ export default function CursorGradient() {
     zIndex: -1,
   }
 
-  return <div style={gradientStyle}></div>
+  return showGradient ? <div style={gradientStyle}></div> : <div></div>
 }
