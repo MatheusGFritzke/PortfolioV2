@@ -1,9 +1,8 @@
-import SessionLink from "./SessionLink";
-
+import SessionLink from './SessionLink'
 
 export default function Header() {
   return (
-    <div className="w-1/2">
+    <div className="md:w-2/4 flex justify-start md:justify-center items-start md:items-baseline pl-16 md:pl-0">
       <div className="sticky top-20 flex flex-col">
         <h1 className="font-VT323 text-3xl font-bold mb-2">Matheus Fritzke</h1>
         <span className="font-VT323 text-base font-bold mb-2">
@@ -16,8 +15,8 @@ export default function Header() {
         <span className="font-VT323 text-xs opacity-75 mb-16">
           em soluções incríveis.
         </span>
-      <SessionLink text="Bio" />
-      <SessionLink text="Experiencia" selected/>
+        <SessionLink text="Bio" />
+        <SessionLink text="Experiencia" selected />
       </div>
     </div>
   )
